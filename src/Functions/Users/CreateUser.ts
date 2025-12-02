@@ -1,10 +1,12 @@
 import { error } from "console";
 import UserSchemas from "../../Schemas/UserSchemas.js";
 import bcrypt from "bcrypt"
-
+import jwt from "jsonwebtoken"
+import { config } from "../../config.js";
 interface CreateUserType {
     error: boolean,
-    message: string
+    message: string,
+    token?: string
 }
 
 const CreateUser = async (mail: string, password: string, user: string) : Promise<CreateUserType> => {
@@ -13,7 +15,7 @@ const CreateUser = async (mail: string, password: string, user: string) : Promis
     if(!user) return {error: true, message: "User can't be null"}
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
+    console.log(mail)
     if(!emailRegex.test(mail)) {
         return {error: true, message: "Mail is invalid"}
     }
@@ -40,7 +42,9 @@ const CreateUser = async (mail: string, password: string, user: string) : Promis
         const newUser = new UserSchemas(data)
         await newUser.save()
 
-        return {error: false, message: "A user was created."}
+        const token = jwt.sign({id: newUser.id, user: user}, config.jwtSecret)
+
+        return {error: false, message: "A user was created.", token}
     }catch (err) {
         console.error(err)
         return {error: true, message: "There was an error"}
