@@ -7,21 +7,22 @@ interface GetUserInterface {
 }
 
 const GetUser = async (id: string): Promise<GetUserInterface> => {
-    if(!id) return {error: true, message: "ID can't be null"}
-
+    if (!id) return { error: true, message: "ID can't be null" }
 
     try {
         const userOnBase = (await UserSchemas.findById(id))
 
-        if(!userOnBase) return {error: true, message: "This ID is invalid!"}
+        if (!userOnBase) return { error: true, message: "This ID is invalid!" }
 
         const dataUser = {
             user: userOnBase.user,
             mail: userOnBase.mail
         }
 
-        return {error: false, message: "", user: dataUser }
+        return { error: false, message: "", user: dataUser }
     } catch (err) {
         return { error: true, message: "", }
     }
 }
+
+export default GetUser
