@@ -2,8 +2,11 @@ import app from "./app.js";
 import { config } from "./config.js";
 import mongoose from "mongoose"
 
-mongoose.connect(config.db_url)
+mongoose.connect(config.dbUrl)
 
 app.listen(config.port, () => {
     console.log(`Server running on ${config.port}`)
 })
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+console.log(emailRegex.test("raphal"))
