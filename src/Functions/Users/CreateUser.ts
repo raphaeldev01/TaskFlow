@@ -15,7 +15,7 @@ const CreateUser = async (mail: string, password: string, user: string) : Promis
     if(!user) return {error: true, message: "User can't be null"}
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    console.log(mail)
+
     if(!emailRegex.test(mail)) {
         return {error: true, message: "Mail is invalid"}
     }
@@ -42,7 +42,7 @@ const CreateUser = async (mail: string, password: string, user: string) : Promis
         const newUser = new UserSchemas(data)
         await newUser.save()
 
-        const token = jwt.sign({id: newUser.id, user: user}, config.jwtSecret)
+        const token = jwt.sign({id: newUser._id, user: user}, config.jwtSecret)
 
         return {error: false, message: "A user was created.", token}
     }catch (err) {

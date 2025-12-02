@@ -7,6 +7,3 @@ mongoose.connect(config.dbUrl)
 app.listen(config.port, () => {
     console.log(`Server running on ${config.port}`)
 })
-
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-console.log(emailRegex.test("raphal"))

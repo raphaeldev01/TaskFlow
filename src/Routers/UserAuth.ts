@@ -1,5 +1,6 @@
 import express from "express"
 import CreateUser from "../Functions/Users/CreateUser.js";
+import LoginUser from "../Functions/Users/LoginUser.js";
 
 const userAuth = express.Router()
 
