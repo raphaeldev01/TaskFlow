@@ -7,7 +7,9 @@ const TaskSchema = new mongoose.Schema({
     state: String,
     dateStart: Number,
     dataEnd: Number || null,
-    tags: Array
+    tags: Array,
+    userID: String,
+    order: Number
 })
 
 export default mongoose.model('Task', TaskSchema)
