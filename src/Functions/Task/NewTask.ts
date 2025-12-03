@@ -55,3 +55,5 @@ const CreateTask: CreateTaskInterface = async ({
         return {error: true, message: "There was an error"}
     }
 }
+
+export default CreateTask
